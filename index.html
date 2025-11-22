@@ -1,309 +1,565 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spoleto - A Sua Cozinha Italiana</title>
+    <title>Totem Spoleto</title>
     <style>
-        /* Estilos Básicos para o Site */
-        body {
-            font-family: 'Arial', sans-serif;
+        /* ================= PALETA DE CORES ================= */
+        :root {
+            --cor-fundo-totem: #EFEBE1;
+            --cor-fundo-site: #ffffff;
+            --text-color: #2c1405;
+            --accent-color: #FDB913;
+            --secondary-text: #5c4b45;
+            --white: #ffffff;
+        }
+
+        /* ================= RESET GERAL ================= */
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        header {
-            text-align: center;
-            padding: 20px 0;
-            background-color: #c7121b; /* Vermelho Spoleto */
-            color: white;
-            border-radius: 8px 8px 0 0;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-        .section {
-            padding: 20px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .section h2 {
-            color: #c7121b;
-            border-left: 5px solid #ffcc00; /* Destaque amarelo */
-            padding-left: 10px;
-        }
-        .call-to-action {
-            text-align: center;
-            padding: 20px;
-            background-color: #ffe8d4; /* Fundo suave para CTAs */
-            margin-top: 20px;
-            border-radius: 5px;
-        }
-        .button {
-            padding: 10px 20px;
-            margin: 10px;
-            background-color: #c7121b;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.1em;
-            transition: background-color 0.3s;
-        }
-        .button:hover {
-            background-color: #a00f15;
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', Arial, sans-serif;
+            user-select: none;
         }
 
-        /* Estilos para a Criação do Prato (Pedido) */
-        .step-container {
-            display: none; /* Esconde os passos por padrão */
+        body {
+            background-color: var(--cor-fundo-site);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             padding: 20px;
-            border: 1px dashed #c7121b;
-            margin-bottom: 15px;
-            border-radius: 5px;
-        }
-        .step-container.active {
-            display: block; /* Mostra o passo ativo */
-        }
-        .option-group label {
-            display: block;
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .option-group label:hover {
-            background-color: #ffcc004d;
-        }
-        .option-group input[type="radio"]:checked + span {
-            font-weight: bold;
-            color: #c7121b;
         }
 
-        /* Estilo para a tela final de resumo */
-        #final-plate {
-            text-align: center;
+        /* ================= CONTAINER PRINCIPAL (TOTEM) ================= */
+        main {
+            background-color: var(--cor-fundo-totem);
+            width: 100%;
+            max-width: 450px; /* Levemente mais largo para os cards respirarem */
+            height: 90vh;
+            max-height: 850px;
+            border-radius: 35px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            border: 4px solid #fff;
+        }
+
+        /* ================= TELAS (SECTIONS) ================= */
+        section {
+            display: none;
+            flex-direction: column;
+            height: 100%;
             padding: 30px;
-            background-color: #e9ffea;
-            border: 2px solid #28a745;
+            /* Isso garante que o conteudo se espalhe melhor */
+            justify-content: flex-start; 
+            animation: fadeIn 0.4s ease-out;
         }
+
+        section.ativa {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* ================= HEADER DA SEÇÃO ================= */
+        .section-header {
+            margin-bottom: 20px;
+            flex-shrink: 0; /* Impede que o titulo encolha */
+        }
+
+        /* ================= LOGO ================= */
+        .logo-img {
+            height: 30px; 
+            display: block;
+            margin: 0 auto;
+            width: auto;
+        }
+        
+        .logo-grande {
+            height: 40px;
+            margin-bottom: 30px;
+        }
+
+        /* ================= TEXTOS ================= */
+        h1 {
+            font-size: 1.8rem;
+            text-align: center;
+            color: var(--text-color);
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 1rem;
+            text-align: center;
+            color: var(--secondary-text);
+            font-weight: normal;
+        }
+
+        /* ================= GRID DE OPÇÕES (Melhorado) ================= */
+        .grid-opcoes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 10px;
+            overflow-y: auto;
+            
+            /* Centraliza o grid verticalmente se sobrar espaço */
+            margin-top: auto;
+            margin-bottom: auto;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--white);
+            border: 2px solid transparent;
+            border-radius: 22px; /* Mais arredondado */
+            padding: 20px 10px;  /* Mais altura interna */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 8px rgba(44, 20, 5, 0.05);
+            position: relative;
+        }
+
+        .card:active {
+            transform: scale(0.96);
+            background-color: #fffbf0;
+        }
+
+        .card:hover {
+            border-color: var(--text-color);
+            transform: translateY(-4px);
+            z-index: 10;
+            box-shadow: 0 10px 20px rgba(44, 20, 5, 0.1);
+        }
+
+        .card p {
+            margin-top: 12px;
+            font-weight: bold;
+            font-size: 1rem; /* Fonte levemente maior */
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        /* ================= IMAGEM PLACEHOLDER (Maior) ================= */
+        .img-box {
+            width: 90px;  /* Aumentado de 80 para 90 */
+            height: 90px;
+            background: #f8f8f8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bbb;
+            font-size: 0.7rem;
+            overflow: hidden;
+            border: 1px solid #e6e6e6;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ================= BOTÕES ================= */
+        .btn-container {
+            margin-top: 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            flex-shrink: 0;
+        }
+
+        .btn-start, .btn-reset {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            border: none;
+            padding: 18px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #dca00b;
+            transition: transform 0.1s;
+        }
+
+        .btn-start:active, .btn-reset:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .btn-voltar {
+            background: transparent;
+            border: 2px solid #d4cfc5;
+            color: var(--secondary-text);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 120px;
+        }
+
+        .btn-voltar:hover {
+            border-color: var(--text-color);
+            color: var(--text-color);
+            background-color: rgba(255,255,255,0.5);
+        }
+
+        /* ================= RODAPÉ E RESUMO ================= */
+        .footer-area {
+            width: 100%;
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(44, 20, 5, 0.1);
+        }
+
+        .resumo-box {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 20px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 2px dashed #dcdcdc;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .resumo-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+            font-size: 1rem;
+        }
+        .resumo-item:last-child { border-bottom: none; }
+
     </style>
 </head>
+
 <body>
 
-    <div id="intro-page" class="container">
-        <header>
-            <h1>Spoleto: Sua Cozinha Italiana</h1>
-            <p>Onde a arte de cozinhar encontra o seu toque pessoal.</p>
-        </header>
+    <main>
+        <section id="tela1" class="ativa" style="justify-content: center;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <img src="https://www.spoleto.com.br/assets/logos/spoleto.svg" alt="Spoleto" class="logo-img logo-grande">
+                
+                <div style="width: 180px; height: 180px; background: #fff; border-radius: 50%; margin: 0 auto 30px; border: 5px solid var(--accent-color); display:flex; align-items:center; justify-content:center; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
+                    <span style="font-size: 4rem;">🍝</span>
+                </div>
 
-        <div class="call-to-action">
-            <h2>Pronto para criar o seu prato?</h2>
-            <p>Comece a montar a sua receita de macarrão perfeita agora mesmo!</p>
-            <button class="button" onclick="startOrder()">Fazer Meu Pedido!</button>
-        </div>
-
-        <div class="section">
-            <h2>🍜 A Arte do Macarrão "Do Seu Jeito"</h2>
-            <p>No Spoleto, você é o Chef! Nosso conceito é simples e delicioso: **Massa Fresca + Ingredientes Selecionados + Seu Toque de Chef = A Refeição Perfeita.** Acreditamos que a melhor receita é aquela que você mesmo cria, misturando sabores e temperos que mais ama.</p>
-            <p>Nossas massas são preparadas diariamente, garantindo a textura ideal que abraça o molho. Com até 8 ingredientes à sua escolha, cada prato é uma experiência única e personalizada, feita na hora, bem na sua frente.</p>
-        </div>
-
-        <div class="section">
-            <h2>🇮🇹 Sobre a Spoleto Empresa</h2>
-            <p>Fundada no ano de **1999**, o Spoleto revolucionou o conceito de *fast-casual* no Brasil, trazendo a culinária italiana para o dia a dia de forma rápida, saborosa e acessível. Nossa missão é oferecer uma experiência gastronômica autêntica e interativa, baseada na personalização e na qualidade dos ingredientes.</p>
-            <p>Somos parte do **Grupo Trigo**, um dos maiores grupos de alimentação do país, e continuamos crescendo, levando o sabor da Itália e a paixão pela cozinha para cada vez mais pessoas. A sustentabilidade e o compromisso social também fazem parte da nossa essência.</p>
-        </div>
-
-        <div class="section">
-            <h2>📍 Onde Nos Encontrar</h2>
-            <p>Estamos presentes em **todo o Brasil** com centenas de lojas em shoppings, ruas e centros comerciais. Para encontrar o Spoleto mais perto de você, utilize o nosso localizador oficial. Se você está em [Inserir Sua Cidade Aqui], nos visite em [Inserir Endereço Fictício/Exemplo]!</p>
-            <p>Oferecemos a opção de consumo no local, retirada e **entrega rápida** através dos principais aplicativos de delivery.</p>
-        </div>
-
-        <div class="call-to-action">
-            <h3>Gostou de nos conhecer?</h3>
-            <p>Chegou a hora de transformar essa inspiração em sabor! Clique abaixo para montar o seu prato.</p>
-            <button class="button" onclick="startOrder()">Quero Encomendar Meu Pedido!</button>
-        </div>
-    </div>
-    
-    <div id="order-page" class="container" style="display: none;">
-        <header>
-            <h1>Crie Seu Prato Spoleto!</h1>
-            <p>Passo a passo, você monta o macarrão dos seus sonhos.</p>
-        </header>
-        
-        <div id="step-1" class="step-container active">
-            <h2>Passo 1: Qual a sua Massa?</h2>
-            <div class="option-group">
-                <label>
-                    <input type="radio" name="massa" value="Fettuccine">
-                    <span>Fettuccine (Largas e planas, ideais para molhos cremosos)</span>
-                </label>
-                <label>
-                    <input type="radio" name="massa" value="Penne">
-                    <span>Penne (Tubulares e riscas, ótimas para reter molhos espessos)</span>
-                </label>
-                <label>
-                    <input type="radio" name="massa" value="Spaghetti">
-                    <span>Spaghetti (Finas e longas, o clássico da culinária italiana)</span>
-                </label>
+                <h1>Bem-vindo!</h1>
+                <p style="color: var(--secondary-text); font-size: 1.1rem;">Sua massa, do seu jeito.</p>
             </div>
-            <button class="button" onclick="nextStep(1)">Próximo Passo</button>
-        </div>
+            <button class="btn-start" onclick="navegar('#tela1', '#tela2')">INICIAR PEDIDO</button>
+        </section>
 
-        <div id="step-2" class="step-container">
-            <h2>Passo 2: Qual o Molho Base?</h2>
-            <div class="option-group">
-                <label>
-                    <input type="radio" name="molho" value="Pomodoro (Tomate)">
-                    <span>Pomodoro (Nosso molho de tomate fresco e leve)</span>
-                </label>
-                <label>
-                    <input type="radio" name="molho" value="Branco (Bechamel)">
-                    <span>Branco (Cremoso molho Bechamel com toque de noz-moscada)</span>
-                </label>
-                <label>
-                    <input type="radio" name="molho" value="Bolonhesa">
-                    <span>Bolonhesa (Molho Pomodoro com carne moída selecionada)</span>
-                </label>
+        <section id="tela2">
+            <div class="section-header">
+                <h1>A Massa</h1>
+                <h2>Escolha o formato</h2>
             </div>
-            <button class="button" onclick="prevStep(2)">Voltar</button>
-            <button class="button" onclick="nextStep(2)">Próximo Passo</button>
-        </div>
-        
-        <div id="step-3" class="step-container">
-            <h2>Passo 3: Ingredientes Extras (Grátis!)</h2>
-            <p>Adicione sabor extra com estes temperos e proteínas:</p>
-            <div class="option-group">
-                <label>
-                    <input type="checkbox" name="extra" value="Bacon">
-                    <span>Adicionar **Bacon** em cubos</span>
-                </label>
-                <label>
-                    <input type="checkbox" name="extra" value="Pimenta Calabresa">
-                    <span>Adicionar um toque de **Pimenta Calabresa** (leve picância)</span>
-                </label>
-                <label>
-                    <input type="checkbox" name="extra" value="Queijo Parmesão Ralado">
-                    <span>Adicionar **Queijo Parmesão Ralado**</span>
-                </label>
+            <div class="grid-opcoes">
+                <div class="card" onclick="escolherItem('Massa', 'Penne', '#tela2', '#tela3')">
+                    <div class="img-box"><span>PENNE</span></div>
+                    <p>Penne</p>
+                </div>
+                <div class="card" onclick="escolherItem('Massa', 'Spaghetti', '#tela2', '#tela3')">
+                    <div class="img-box"><span>SPAGHETTI</span></div>
+                    <p>Spaghetti</p>
+                </div>
+                <div class="card" onclick="escolherItem('Massa', 'Farfalle', '#tela2', '#tela3')">
+                    <div class="img-box"><span>FARFALLE</span></div>
+                    <p>Farfalle</p>
+                </div>
+                <div class="card" onclick="escolherItem('Massa', 'Fusilli', '#tela2', '#tela3')">
+                    <div class="img-box"><span>FUSILLI</span></div>
+                    <p>Fusilli</p>
+                </div>
+                <div class="card" onclick="escolherItem('Massa', 'Fettuccine', '#tela2', '#tela3')">
+                    <div class="img-box"><span>FETTUCCINE</span></div>
+                    <p>Fettuccine</p>
+                </div>
+                <div class="card" onclick="escolherItem('Massa', 'Ravioli', '#tela2', '#tela3')">
+                    <div class="img-box"><span>RAVIOLI</span></div>
+                    <p>Ravioli</p>
+                </div>
             </div>
-            <button class="button" onclick="prevStep(3)">Voltar</button>
-            <button class="button" onclick="nextStep(3)">Finalizar Pedido</button>
-        </div>
+            <div class="btn-container">
+                <button class="btn-voltar" onclick="navegar('#tela2', '#tela1')">VOLTAR</button>
+            </div>
+        </section>
 
-        <div id="step-4" class="step-container">
-            <h2>Passo 4: Seu Prato Está Pronto!</h2>
-            <div id="final-plate">
-                <h3>Resumo do Seu Pedido:</h3>
-                <p id="summary-massa"></p>
-                <p id="summary-molho"></p>
-                <p id="summary-extras"></p>
-                <hr>
-                <p><strong>Aproveite seu Spoleto!</strong> Seu pedido está sendo enviado para preparo.</p>
+        <section id="tela3">
+            <div class="section-header">
+                <h1>O Molho</h1>
+                <h2>Escolha o sabor</h2>
             </div>
-            <button class="button" onclick="newOrder()">Fazer Novo Pedido</button>
-        </div>
-    </div>
+            <div class="grid-opcoes">
+                <div class="card" onclick="escolherItem('Molho', 'Pomodoro', '#tela3', '#tela4')">
+                    <div class="img-box"><span>POMODORO</span></div>
+                    <p>Pomodoro</p>
+                </div>
+                <div class="card" onclick="escolherItem('Molho', 'Branco', '#tela3', '#tela4')">
+                    <div class="img-box"><span>BRANCO</span></div>
+                    <p>Branco</p>
+                </div>
+                <div class="card" onclick="escolherItem('Molho', 'Bolonhesa', '#tela3', '#tela4')">
+                    <div class="img-box"><span>BOLONHESA</span></div>
+                    <p>Bolonhesa</p>
+                </div>
+                <div class="card" onclick="escolherItem('Molho', '4 Queijos', '#tela3', '#tela4')">
+                    <div class="img-box"><span>4 QUEIJOS</span></div>
+                    <p>4 Queijos</p>
+                </div>
+                 <div class="card" onclick="escolherItem('Molho', 'Funghi', '#tela3', '#tela4')">
+                    <div class="img-box"><span>FUNGHI</span></div>
+                    <p>Funghi</p>
+                </div>
+                <div class="card" onclick="escolherItem('Molho', 'Rosé', '#tela3', '#tela4')">
+                    <div class="img-box"><span>ROSÉ</span></div>
+                    <p>Rosé</p>
+                </div>
+            </div>
+            <div class="btn-container">
+                <button class="btn-voltar" onclick="navegar('#tela3', '#tela2')">VOLTAR</button>
+            </div>
+        </section>
+
+        <section id="tela4">
+            <div class="section-header">
+                <h1>Extra</h1>
+                <h2>Um toque final</h2>
+            </div>
+            <div class="grid-opcoes">
+                <div class="card" onclick="escolherItem('Extra', 'Queijo Ralado', '#tela4', '#tela-bebidas')">
+                    <div class="img-box"><span>QUEIJO</span></div>
+                    <p>Queijo Ralado</p>
+                </div>
+                <div class="card" onclick="escolherItem('Extra', 'Bacon', '#tela4', '#tela-bebidas')">
+                    <div class="img-box"><span>BACON</span></div>
+                    <p>Bacon</p>
+                </div>
+                <div class="card" onclick="escolherItem('Extra', 'Alho Frito', '#tela4', '#tela-bebidas')">
+                    <div class="img-box"><span>ALHO</span></div>
+                    <p>Alho Frito</p>
+                </div>
+                <div class="card" onclick="escolherItem('Extra', 'Sem Extra', '#tela4', '#tela-bebidas')">
+                    <div class="img-box"><span>🚫</span></div>
+                    <p>Sem extra</p>
+                </div>
+            </div>
+            <div class="btn-container">
+                <button class="btn-voltar" onclick="navegar('#tela4', '#tela3')">VOLTAR</button>
+            </div>
+        </section>
+
+        <section id="tela-bebidas">
+            <div class="section-header">
+                <h1>Bebida</h1>
+                <h2>O que vai beber hoje?</h2>
+            </div>
+            <div class="grid-opcoes">
+                <div class="card" onclick="navegar('#tela-bebidas', '#tela-refri')">
+                    <div class="img-box"><span>REFRI</span></div>
+                    <p>Refrigerante</p>
+                </div>
+                <div class="card" onclick="navegar('#tela-bebidas', '#tela-suco')">
+                    <div class="img-box"><span>SUCO</span></div>
+                    <p>Suco</p>
+                </div>
+                <div class="card" onclick="navegar('#tela-bebidas', '#tela-agua')">
+                    <div class="img-box"><span>ÁGUA</span></div>
+                    <p>Água</p>
+                </div>
+                <div class="card" onclick="navegar('#tela-bebidas', '#tela-vinho')">
+                    <div class="img-box"><span>VINHO</span></div>
+                    <p>Vinho</p>
+                </div>
+                <div class="card" onclick="navegar('#tela-bebidas', '#tela-cerveja')">
+                    <div class="img-box"><span>CERVEJA</span></div>
+                    <p>Cerveja</p>
+                </div>
+                 <div class="card" onclick="escolherItem('Bebida', 'Sem Bebida', '#tela-bebidas', '#tela-final')">
+                    <div class="img-box"><span>🚫</span></div>
+                    <p>Sem bebida</p>
+                </div>
+            </div>
+            <div class="btn-container">
+                <button class="btn-voltar" onclick="navegar('#tela-bebidas', '#tela4')">VOLTAR</button>
+            </div>
+        </section>
+
+        <section id="tela-refri">
+            <div class="section-header"><h1>Refrigerante</h1><h2>Sua preferência</h2></div>
+            <div class="grid-opcoes">
+                <div class="card" onclick="escolherItem('Bebida', 'Coca-Cola', '#tela-refri', '#tela-final')">
+                    <div class="img-box"><span>COCA</span></div><p>Coca-Cola</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Guaraná', '#tela-refri', '#tela-final')">
+                    <div class="img-box"><span>GUARANÁ</span></div><p>Guaraná</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Fanta', '#tela-refri', '#tela-final')">
+                    <div class="img-box"><span>FANTA</span></div><p>Fanta</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Sprite', '#tela-refri', '#tela-final')">
+                    <div class="img-box"><span>SPRITE</span></div><p>Sprite</p>
+                </div>
+            </div>
+            <div class="btn-container"><button class="btn-voltar" onclick="navegar('#tela-refri', '#tela-bebidas')">VOLTAR</button></div>
+        </section>
+
+        <section id="tela-suco">
+            <div class="section-header"><h1>Sucos</h1><h2>Natural</h2></div>
+            <div class="grid-opcoes">
+                <div class="card" onclick="escolherItem('Bebida', 'Laranja', '#tela-suco', '#tela-final')">
+                    <div class="img-box"><span>LARANJA</span></div><p>Laranja</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Uva', '#tela-suco', '#tela-final')">
+                    <div class="img-box"><span>UVA</span></div><p>Uva</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Morango', '#tela-suco', '#tela-final')">
+                    <div class="img-box"><span>MORANGO</span></div><p>Morango</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Limão', '#tela-suco', '#tela-final')">
+                    <div class="img-box"><span>LIMÃO</span></div><p>Limão</p>
+                </div>
+            </div>
+            <div class="btn-container"><button class="btn-voltar" onclick="navegar('#tela-suco', '#tela-bebidas')">VOLTAR</button></div>
+        </section>
+
+        <section id="tela-agua">
+            <div class="section-header"><h1>Água</h1><h2>Hidrate-se</h2></div>
+            <div class="grid-opcoes">
+                <div class="card" onclick="escolherItem('Bebida', 'Sem Gás', '#tela-agua', '#tela-final')">
+                    <div class="img-box"><span>S/ GÁS</span></div><p>Sem Gás</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Com Gás', '#tela-agua', '#tela-final')">
+                    <div class="img-box"><span>C/ GÁS</span></div><p>Com Gás</p>
+                </div>
+            </div>
+            <div class="btn-container"><button class="btn-voltar" onclick="navegar('#tela-agua', '#tela-bebidas')">VOLTAR</button></div>
+        </section>
+
+        <section id="tela-vinho">
+            <div class="section-header"><h1>Vinhos</h1><h2>Selecione</h2></div>
+            <div class="grid-opcoes">
+                <div class="card" onclick="escolherItem('Bebida', 'Tinto', '#tela-vinho', '#tela-final')">
+                    <div class="img-box"><span>TINTO</span></div><p>Tinto</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Branco', '#tela-vinho', '#tela-final')">
+                    <div class="img-box"><span>BRANCO</span></div><p>Branco</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Rosé', '#tela-vinho', '#tela-final')">
+                    <div class="img-box"><span>ROSÉ</span></div><p>Rosé</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Da Casa', '#tela-vinho', '#tela-final')">
+                    <div class="img-box"><span>CASA</span></div><p>Da Casa</p>
+                </div>
+            </div>
+            <div class="btn-container"><button class="btn-voltar" onclick="navegar('#tela-vinho', '#tela-bebidas')">VOLTAR</button></div>
+        </section>
+
+        <section id="tela-cerveja">
+            <div class="section-header"><h1>Cervejas</h1><h2>Gelada</h2></div>
+            <div class="grid-opcoes">
+                <div class="card" onclick="escolherItem('Bebida', 'Heineken', '#tela-cerveja', '#tela-final')">
+                    <div class="img-box"><span>HEINEKEN</span></div><p>Heineken</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Stella', '#tela-cerveja', '#tela-final')">
+                    <div class="img-box"><span>STELLA</span></div><p>Stella</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Spaten', '#tela-cerveja', '#tela-final')">
+                    <div class="img-box"><span>SPATEN</span></div><p>Spaten</p>
+                </div>
+                <div class="card" onclick="escolherItem('Bebida', 'Brahma', '#tela-cerveja', '#tela-final')">
+                    <div class="img-box"><span>BRAHMA</span></div><p>Brahma</p>
+                </div>
+            </div>
+            <div class="btn-container"><button class="btn-voltar" onclick="navegar('#tela-cerveja', '#tela-bebidas')">VOLTAR</button></div>
+        </section>
+
+        <section id="tela-final" style="justify-content: center;">
+            <div style="width: 100%; text-align: center;">
+                <h1 style="margin-bottom: 10px;">Seu Pedido</h1>
+                <p style="margin-bottom: 20px; font-size: 1rem;">Confira os detalhes abaixo</p>
+                
+                <div class="resumo-box" id="lista-pedido">
+                    </div>
+                
+                <p style="color: #2e7d32; font-weight: bold; font-size: 1rem; margin-top:10px;">
+                    ✓ Pedido enviado para a cozinha
+                </p>
+            </div>
+
+            <div class="btn-container">
+                <button class="btn-reset" onclick="reiniciar()">NOVO PEDIDO</button>
+                
+                <div class="footer-area">
+                    <img src="https://www.spoleto.com.br/assets/logos/spoleto.svg" alt="Spoleto" class="logo-img">
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <script>
-        let currentStep = 1; // Controla qual passo de pedido está ativo
+        let pedido = { Massa: '', Molho: '', Extra: '', Bebida: '' };
 
-        // Função para iniciar o pedido (troca a tela de Introdução para a de Pedido)
-        function startOrder() {
-            document.getElementById('intro-page').style.display = 'none';
-            document.getElementById('order-page').style.display = 'block';
-            showStep(1); // Garante que o primeiro passo é exibido
-        }
-        
-        // Função para voltar à tela inicial
-        function newOrder() {
-            document.getElementById('intro-page').style.display = 'block';
-            document.getElementById('order-page').style.display = 'none';
-            currentStep = 1;
-            // Opcional: Limpar as seleções de rádio e checkbox aqui.
-        }
+        function navegar(atual, proximo) {
+            let telaAtual = document.querySelector(atual);
+            let telaProxima = document.querySelector(proximo);
 
-        // Função para avançar para o próximo passo de pedido
-        function nextStep(stepNumber) {
-            // Pequena validação para garantir que uma opção foi escolhida (apenas para radio, não para checkbox)
-            if (stepNumber < 3) {
-                const stepName = stepNumber === 1 ? 'massa' : 'molho';
-                const selectedOption = document.querySelector(`input[name="${stepName}"]:checked`);
-                if (!selectedOption) {
-                    alert("Por favor, selecione uma opção antes de prosseguir.");
-                    return;
-                }
-            }
-
-            if (stepNumber === 3) {
-                generateSummary(); // Gera o resumo na última etapa
-                showStep(4);
-            } else if (stepNumber < 4) {
-                showStep(stepNumber + 1);
+            if(telaAtual && telaProxima) {
+                telaAtual.classList.remove('ativa');
+                telaProxima.classList.add('ativa');
+                if(proximo === '#tela-final') mostrarResumo();
             }
         }
 
-        // Função para voltar para o passo anterior
-        function prevStep(stepNumber) {
-            if (stepNumber > 1) {
-                showStep(stepNumber - 1);
+        function escolherItem(categoria, item, atual, proximo) {
+            pedido[categoria] = item;
+            navegar(atual, proximo);
+        }
+
+        function mostrarResumo() {
+            const box = document.getElementById('lista-pedido');
+            box.innerHTML = '';
+            for (let [cat, val] of Object.entries(pedido)) {
+                let row = document.createElement('div');
+                row.className = 'resumo-item';
+                row.innerHTML = `<span style="color:#666">${cat}:</span><span style="font-weight:bold; color:#2c1405">${val}</span>`;
+                box.appendChild(row);
             }
         }
 
-        // Função que controla a exibição dos passos do pedido
-        function showStep(step) {
-            // Esconde todos os containers de passo
-            document.querySelectorAll('.step-container').forEach(el => {
-                el.style.display = 'none';
-                el.classList.remove('active');
-            });
-
-            // Exibe o container do passo atual
-            const targetStep = document.getElementById(`step-${step}`);
-            if (targetStep) {
-                targetStep.style.display = 'block';
-                targetStep.classList.add('active');
-                currentStep = step;
-            }
+        function reiniciar() {
+            pedido = { Massa: '', Molho: '', Extra: '', Bebida: '' };
+            document.querySelectorAll('section').forEach(s => s.classList.remove('ativa'));
+            document.querySelector('#tela1').classList.add('ativa');
         }
-
-        // Função para gerar o resumo final do prato
-        function generateSummary() {
-            // 1. Coleta a Massa
-            const massaElement = document.querySelector('input[name="massa"]:checked');
-            const massa = massaElement ? massaElement.value : 'Massa não selecionada';
-            
-            // 2. Coleta o Molho
-            const molhoElement = document.querySelector('input[name="molho"]:checked');
-            const molho = molhoElement ? molhoElement.value : 'Molho não selecionado';
-
-            // 3. Coleta os Extras
-            const extrasElements = document.querySelectorAll('input[name="extra"]:checked');
-            const extras = Array.from(extrasElements).map(el => el.value);
-            const extrasText = extras.length > 0 ? `Ingredientes Extras: ${extras.join(', ')}.` : 'Nenhum ingrediente extra selecionado.';
-
-            // 4. Exibe o Resumo
-            document.getElementById('summary-massa').innerHTML = `<strong>Massa:</strong> ${massa}`;
-            document.getElementById('summary-molho').innerHTML = `<strong>Molho Base:</strong> ${molho}`;
-            document.getElementById('summary-extras').innerHTML = extrasText;
-        }
-
-        // Inicia a exibição no passo 1 da página de pedido (caso a ordem fosse carregada diretamente)
-        // showStep(1); 
     </script>
 
 </body>
