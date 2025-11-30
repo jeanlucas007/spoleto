@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos</title>
+</head>
+<body>
+
+<style>
+:root {
+    --cor-fundo-totem: #EFEBE1;
+    --cor-fundo-site: #ffffff;
+    --text-color: #2c1405;
+    --accent-color: #FDB913;
+    --secondary-text: #5c4b45;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+}
+
+/* IGUAL AO INDEX */
+body {
+    background-color: var(--cor-fundo-site);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+main {
+    background-color: var(--cor-fundo-totem);
+    width: 100%;
+    max-width: 450px;
+    height: 90vh;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden; /* IGUAL AO INDEX */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    border: 4px solid #fff;
+}
+
+/* TELA INTERNA – IGUAL AO INDEX */
+section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 30px;
+    overflow-y: auto;           /* ← AQUI AGREGA O SCROLL */
+}
+
+/* TÍTULOS */
+.section-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.section-header h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.section-header h2 {
+    font-size: 1rem;
+    color: var(--secondary-text);
+}
+
+/* CARD */
+.card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 6px solid var(--accent-color);
+    box-shadow: 0 8px 20px rgba(44,20,5,0.15);
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.item-linha {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.timestamp {
+    margin-top: 8px;
+    font-size: .8rem;
+    text-align: right;
+    color: #6d5d57;
+}
+
+/* BOTÃO VOLTAR */
+.btn-container {
+    margin-top: auto;
+}
+
+.btn-voltar {
+    width: 100%;
+    background: var(--accent-color);
+    color: var(--text-color);
+    border: none;
+    padding: 18px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #dca00b;
+}
+</style>
+
+<main>
+    <section id="tela-pedidos" class="ativa">
+        
+        <div class="section-header">
+            <h1>Pedidos Realizados</h1>
+            <h2>Listagem dos pedidos enviados</h2>
+        </div>
+
+        <div id="lista-pedidos">
+            <!-- Os pedidos aparecerão aqui -->
+        </div>
+
+        <div class="btn-container">
+            <button class="btn-voltar" onclick="window.location.href='index.html'">ATUALIZAR</button>
+        </div>
+
+    </section>
+</main>
+
+<script>
+function carregarPedidos() {
+    fetch("pedidos.json")
+        .then(res => res.json())
+        .then(pedidos => {
+            let lista = document.getElementById("lista-pedidos");
+            lista.innerHTML = "";
+
+            pedidos.forEach((p, index) => {
+                let div = document.createElement("div");
+                div.classList.add("card");
+
+                div.innerHTML = `
+                    <h3>Pedido #${index + 1}</h3>
+                    <div class="item-linha"><span>Cliente:</span><span>${p.Cliente}</span></div>
+                    <div class="item-linha"><span>Massa:</span><span>${p.Massa}</span></div>
+                    <div class="item-linha"><span>Molho:</span><span>${p.Molho}</span></div>
+                    <div class="item-linha"><span>Extra:</span><span>${p.Extra}</span></div>
+                    <div class="item-linha"><span>Bebida:</span><span>${p.Bebida}</span></div>
+
+                    <div class="timestamp">${p.timestamp}</div>
+                `;
+
+                lista.appendChild(div);
+            });
+        });
+}
+
+carregarPedidos();
+</script>
+
+</body>
+</html>

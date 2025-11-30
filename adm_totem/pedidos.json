@@ -1,0 +1,34 @@
+[
+    {
+        "Massa": "Penne",
+        "Molho": "4 Queijos",
+        "Extra": "Queijo Ralado",
+        "Bebida": "Com G\u00e1s",
+        "Cliente": "Jonathan",
+        "timestamp": "2025-11-30 00:37:29"
+    },
+    {
+        "Massa": "Spaghetti",
+        "Molho": "Bolonhesa",
+        "Extra": "Bacon",
+        "Bebida": "Guaran\u00e1",
+        "Cliente": "Jean",
+        "timestamp": "2025-11-30 00:42:36"
+    },
+    {
+        "Massa": "Penne",
+        "Molho": "Branco",
+        "Extra": "Queijo Ralado",
+        "Bebida": "Tinto",
+        "Cliente": "Jean",
+        "timestamp": "2025-11-30 00:44:34"
+    },
+    {
+        "Massa": "Penne",
+        "Molho": "Branco",
+        "Extra": "Alho Frito",
+        "Bebida": "Ros\u00e9",
+        "Cliente": "Jean",
+        "timestamp": "2025-11-30 00:44:55"
+    }
+]

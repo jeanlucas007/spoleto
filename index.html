@@ -273,9 +273,27 @@
                 <h1>Bem-vindo!</h1>
                 <p style="color: var(--secondary-text); font-size: 1.1rem;">Sua massa, do seu jeito.</p>
             </div>
-            <button class="btn-start" onclick="navegar('#tela1', '#tela2')">INICIAR PEDIDO</button>
+            <button class="btn-start" onclick="navegar('#tela1', '.telacad')">INICIAR PEDIDO</button>
         </section>
 
+
+        <section class="telacad">
+            <div class="section-header">
+                <h1>Cadastro</h1>
+                <h2>Informe seu nome</h2>
+            </div>
+            <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <input type="text" id="nome-cliente" placeholder="Seu nome" style="padding: 12px 15px; font-size: 1rem; border-radius: 8px; border: 2px solid #ccc; width: 80%; max-width: 300px; margin-bottom: 20px;">
+                <button class="btn-start" onclick="
+                    const nome = document.getElementById('nome-cliente').value.trim();
+                    if(nome) {
+                        escolherItem('Cliente', nome, '.telacad', '#tela2');
+                    } else {
+                        alert('Por favor, insira seu nome para continuar.');
+                    }
+                ">CONTINUAR</button>
+            </div>
+        </section>
         <section id="tela2">
             <div class="section-header">
                 <h1>A Massa</h1>
@@ -545,15 +563,30 @@
         }
 
         function mostrarResumo() {
-            const box = document.getElementById('lista-pedido');
-            box.innerHTML = '';
-            for (let [cat, val] of Object.entries(pedido)) {
-                let row = document.createElement('div');
-                row.className = 'resumo-item';
-                row.innerHTML = `<span style="color:#666">${cat}:</span><span style="font-weight:bold; color:#2c1405">${val}</span>`;
-                box.appendChild(row);
-            }
-        }
+    const box = document.getElementById('lista-pedido');
+    box.innerHTML = '';
+
+    for (let [cat, val] of Object.entries(pedido)) {
+        let row = document.createElement('div');
+        row.className = 'resumo-item';
+        row.innerHTML = `<span style="color:#666">${cat}:</span><span style="font-weight:bold; color:#2c1405">${val}</span>`;
+        box.appendChild(row);
+    }
+
+    // =============================
+    //  ENVIA O PEDIDO PARA O PHP
+    // =============================
+    fetch("adm_totem/salvar_pedido.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(pedido)
+    })
+    .then(r => r.json())
+    .then(res => console.log(res))
+    .catch(err => console.error("Erro ao enviar pedido:", err));
+}
 
         function reiniciar() {
             pedido = { Massa: '', Molho: '', Extra: '', Bebida: '' };
