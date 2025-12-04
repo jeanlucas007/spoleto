@@ -21,6 +21,7 @@ if (!file_exists($arquivo)) {
 $pedidos = json_decode(file_get_contents($arquivo), true);
 
 // Adiciona o novo pedido com horário
+date_default_timezone_set("America/Sao_Paulo");
 $dados["timestamp"] = date("Y-m-d H:i:s");
 $pedidos[] = $dados;
 
