@@ -402,9 +402,9 @@
                     <div class="img-box"><img src="img/pomodoro.jpg" alt="Pomodoro"></div>
                     <p>Pomodoro</p>
                 </div>
-                <div class="card" onclick="escolherItem('Molho', 'Molho Branco', '#tela3', '#tela4')">
+                <div class="card" onclick="escolherItem('Molho', 'Branco', '#tela3', '#tela4')">
                     <div class="img-box"><img src="img/molho-branco.jpg" alt="Branco"></div>
-                    <p>Branco</p>
+                    <p>Molho Branco</p>
                 </div>
                 <div class="card" onclick="escolherItem('Molho', 'Bolonhesa', '#tela3', '#tela4')">
                     <div class="img-box"><img src="img/bolonhesa.jpg" alt="Bolonhesa"></div>
@@ -624,35 +624,36 @@
     </main>
 
     <script>
+        // Objeto para armazenar o pedido
         let pedido = { Massa: '', Molho: '', Extra: '', Bebida: '' };
-
+        // Função para navegar entre telas
         function navegar(atual, proximo) {
             let telaAtual = document.querySelector(atual);
             let telaProxima = document.querySelector(proximo);
-
+            // Troca de telas 
             if (telaAtual && telaProxima) {
                 telaAtual.classList.remove('ativa');
                 telaProxima.classList.add('ativa');
                 if (proximo === '#tela-final') mostrarResumo();
             }
         }
-
+        // Função para escolher item e navegar
         function escolherItem(categoria, item, atual, proximo) {
             pedido[categoria] = item;
             navegar(atual, proximo);
         }
-
+        // Função para mostrar o resumo do pedido
         function mostrarResumo() {
             const box = document.getElementById('lista-pedido');
             box.innerHTML = '';
-
+            // Adiciona cada item do pedido ao resumo
             for (let [cat, val] of Object.entries(pedido)) {
                 let row = document.createElement('div');
                 row.className = 'resumo-item';
                 row.innerHTML = `<span style="color:#666">${cat}:</span><span style="font-weight:bold; color:#2c1405">${val}</span>`;
                 box.appendChild(row);
             }
-
+            // Envia o pedido para o servidor
             fetch("adm_totem/salvar_pedido.php", {
                 method: "POST",
                 headers: {
@@ -664,7 +665,7 @@
                 .then(res => console.log(res))
                 .catch(err => console.error("Erro ao enviar pedido:", err));
         }
-
+        // Função para reiniciar o pedido
         function reiniciar() {
             pedido = { Massa: '', Molho: '', Extra: '', Bebida: '' };
             document.querySelectorAll('section').forEach(s => s.classList.remove('ativa'));
