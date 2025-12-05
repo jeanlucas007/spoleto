@@ -1,34 +1,198 @@
 [
     {
+        "Massa": "Spaghetti",
+        "Molho": "Branco",
+        "Extra": "Bacon",
+        "Bebida": "Suco de Uva",
+        "Cliente": "teste",
+        "timestamp": "2025-12-05 14:37:31"
+    },
+    {
         "Massa": "Penne",
-        "Molho": "4 Queijos",
-        "Extra": "Queijo Ralado",
-        "Bebida": "Com G\u00e1s",
-        "Cliente": "Jonathan",
-        "timestamp": "2025-11-30 00:37:29"
+        "Molho": "Pomodoro",
+        "Extra": [],
+        "Bebida": "\u00c1gua sem G\u00e1s",
+        "Cliente": "jean teste 2",
+        "timestamp": "2025-12-05 14:52:22"
+    },
+    {
+        "Massa": "Penne",
+        "Molho": "Pomodoro",
+        "Extra": [
+            [
+                "Queijo Ralado"
+            ]
+        ],
+        "Bebida": "Coca-Cola",
+        "Cliente": "jesan",
+        "timestamp": "2025-12-05 14:53:07"
     },
     {
         "Massa": "Spaghetti",
-        "Molho": "Bolonhesa",
-        "Extra": "Bacon",
+        "Molho": "Pomodoro",
+        "Extra": [],
         "Bebida": "Guaran\u00e1",
-        "Cliente": "Jean",
-        "timestamp": "2025-11-30 00:42:36"
+        "Cliente": "jean",
+        "timestamp": "2025-12-05 14:55:28"
+    },
+    {
+        "Massa": "Penne",
+        "Molho": "Pomodoro",
+        "Extra": [
+            "Queijo Ralado",
+            "Bacon",
+            "Alho Frito"
+        ],
+        "Bebida": "Guaran\u00e1",
+        "Cliente": "jea",
+        "timestamp": "2025-12-05 15:01:37"
+    },
+    {
+        "Massa": "Penne",
+        "Molho": "Pomodoro",
+        "Extra": [
+            "Queijo Ralado",
+            "Queijo Ralado"
+        ],
+        "Bebida": "Coca-Cola",
+        "Cliente": "s",
+        "timestamp": "2025-12-05 15:27:30"
+    },
+    {
+        "Massa": "Spaghetti",
+        "Molho": "Pomodoro",
+        "Extra": [
+            "Queijo Ralado"
+        ],
+        "Bebida": "Guaran\u00e1",
+        "Cliente": "jean",
+        "timestamp": "2025-12-05 16:35:31"
     },
     {
         "Massa": "Penne",
         "Molho": "Branco",
-        "Extra": "Queijo Ralado",
-        "Bebida": "Tinto",
-        "Cliente": "Jean",
-        "timestamp": "2025-11-30 00:44:34"
+        "Extra": [
+            "Alho Frito",
+            "Pimenta",
+            "Queijo Ralado"
+        ],
+        "Bebida": "Guaran\u00e1",
+        "Cliente": "jean",
+        "timestamp": "2025-12-05 16:35:48"
+    },
+    {
+        "Massa": "Penne",
+        "Molho": "Pomodoro",
+        "Extra": [
+            "Bacon",
+            "Queijo Ralado"
+        ],
+        "Bebida": "\u00c1gua sem G\u00e1s",
+        "Cliente": "teste",
+        "timestamp": "2025-12-05 16:40:19"
+    },
+    {
+        "Massa": "Spaghetti",
+        "Molho": "Pomodoro",
+        "Extra": [],
+        "Bebida": "Espumante",
+        "Cliente": "teste",
+        "timestamp": "2025-12-05 16:48:15"
     },
     {
         "Massa": "Penne",
         "Molho": "Branco",
-        "Extra": "Alho Frito",
-        "Bebida": "Ros\u00e9",
-        "Cliente": "Jean",
-        "timestamp": "2025-11-30 00:44:55"
+        "Extra": [],
+        "Bebida": "Vinho Tinto",
+        "Cliente": "teste",
+        "timestamp": "2025-12-05 16:48:25"
+    },
+    {
+        "Massa": "Spaghetti",
+        "Molho": "Pomodoro",
+        "Extra": [
+            "Bacon",
+            "Queijo Ralado"
+        ],
+        "Bebida": "Coca-Cola",
+        "Cliente": "teste",
+        "timestamp": "2025-12-05 16:48:39"
+    },
+    {
+        "Massa": "Penne",
+        "Molho": "Pomodoro",
+        "Extra": [
+            "Alho Frito"
+        ],
+        "Bebida": "Espumante",
+        "Cliente": "jean",
+        "timestamp": "2025-12-05 17:07:24"
+    },
+    {
+        "Massa": "Spaghetti",
+        "Molho": "Pomodoro",
+        "Extra": [
+            "Bacon",
+            "Queijo Ralado"
+        ],
+        "Bebida": "Guaran\u00e1",
+        "Cliente": "jean",
+        "timestamp": "2025-12-05 17:18:00"
+    },
+    {
+        "Massa": "Penne",
+        "Molho": "Pomodoro",
+        "Extra": [
+            "Queijo Ralado"
+        ],
+        "Bebida": "Coca-Cola",
+        "Cliente": "teste",
+        "Remover": "sem cebola",
+        "timestamp": "2025-12-05 17:20:57"
+    },
+    {
+        "Massa": "Penne",
+        "Molho": "Branco",
+        "Extra": [
+            "Queijo Ralado"
+        ],
+        "Bebida": "Guaran\u00e1",
+        "Cliente": "jean",
+        "Remover": "testeeeee",
+        "timestamp": "2025-12-05 17:23:33"
+    },
+    {
+        "Massa": "Spaghetti",
+        "Molho": "Pomodoro",
+        "Extra": [
+            "Bacon"
+        ],
+        "Bebida": "Coca-Cola",
+        "Remover": "TESTE",
+        "Cliente": "jean",
+        "timestamp": "2025-12-05 17:27:40"
+    },
+    {
+        "Massa": "Penne",
+        "Molho": "Pomodoro",
+        "Extra": [
+            "Queijo Ralado"
+        ],
+        "Bebida": "Fanta",
+        "Remover": "sem cebola",
+        "Cliente": "jean",
+        "timestamp": "2025-12-05 18:19:11"
+    },
+    {
+        "Massa": "Fettuccine",
+        "Molho": "Ros\u00e9",
+        "Extra": [
+            "Alho Frito",
+            "Bacon"
+        ],
+        "Bebida": "\u00c1gua sem G\u00e1s",
+        "Remover": "remove o alho a\u00ed",
+        "Cliente": "teste real",
+        "timestamp": "2025-12-05 18:25:14"
     }
 ]

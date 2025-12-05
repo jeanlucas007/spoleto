@@ -124,7 +124,7 @@
             overflow-y: auto;
             /* Permite rolagem se necessário */
 
-            
+
             margin-top: auto;
             margin-bottom: auto;
             width: 100%;
@@ -307,11 +307,13 @@
             text-align: center;
             color: #88746d;
             font-weight: bold;
-            text-decoration: underline;
             cursor: pointer;
             font-size: 1.1rem;
             transition: all 0.2s;
             width: 100%;
+
+            
+            flex-shrink: 0;
         }
 
         .btn-link-opcao:hover {
@@ -437,32 +439,47 @@
                 <h1>Extra</h1>
                 <h2>Um toque final</h2>
             </div>
+<style>
+    .card.selecionado {
+    border: #2e7d32 4px solid;
+    transform: scale(1.05);
+    transition: 0.2s;
+}
 
+.card.selecionado p {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+}
+</style>
             <div class="grid-opcoes">
-                <div class="card" onclick="escolherItem('Extra', 'Queijo Ralado', '#tela4', '#tela-bebidas')">
+                <div class="card" onclick="escolherItem('Extra', 'Queijo Ralado')">
                     <div class="img-box"><img src="img/queijo-ralado.jpg" alt="Queijo"></div>
                     <p>Queijo Ralado</p>
                 </div>
-                <div class="card" onclick="escolherItem('Extra', 'Bacon', '#tela4', '#tela-bebidas')">
+                <div class="card" onclick="escolherItem('Extra', 'Bacon')">
                     <div class="img-box"><img src="img/bacon.jpg" alt="Bacon"></div>
                     <p>Bacon</p>
                 </div>
-                <div class="card" onclick="escolherItem('Extra', 'Alho Frito', '#tela4', '#tela-bebidas')">
+                <div class="card" onclick="escolherItem('Extra', 'Alho Frito')">
                     <div class="img-box"><img src="img/alho-frito.jpg" alt="Alho"></div>
                     <p>Alho Frito</p>
                 </div>
-                <div class="card" onclick="escolherItem('Extra', 'Alho Frito', '#tela4', '#tela-bebidas')">
+                <div class="card" onclick="escolherItem('Extra', 'Pimenta')">
                     <div class="img-box"><img src="img/pimenta.jpg" alt="Alho"></div>
                     <p>Pimenta</p>
                 </div>
             </div>
 
+
+        
+            <div class="btn-link-opcao"
+                 onclick="navegar('#tela4', '#tela-bebidas')">
+                CONTINUAR
             </div>
 
 
-            <div class="btn-link-opcao" onclick="escolherItem('Extra', 'Sem Extra', '#tela4', '#tela-bebidas')">
-                Não quero adicionar extra
-            </div>
+
+
+
 
             <div class="btn-container">
                 <button class="btn-voltar" onclick="navegar('#tela4', '#tela3')">VOLTAR</button>
@@ -494,7 +511,7 @@
                 </div>
 
                 <div class="btn-link-opcao"
-                    onclick="escolherItem('Bebida', 'Sem Bebida', '#tela-bebidas', '#tela-final')">
+                    onclick="escolherItem('Bebida', 'Sem Bebida', '#tela-bebidas', '#telaajuste')">
                     Não vou beber nada agora
                 </div>
 
@@ -509,19 +526,19 @@
                 <h2>Sua preferência</h2>
             </div>
             <div class="grid-opcoes">
-                <div class="card" onclick="escolherItem('Bebida', 'Coca-Cola', '#tela-refri', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Coca-Cola', '#tela-refri', '#telaajuste')">
                     <div class="img-box"><img src="img/coca.jpg" alt="Coca"></div>
                     <p>Coca-Cola</p>
                 </div>
-                <div class="card" onclick="escolherItem('Bebida', 'Guaraná', '#tela-refri', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Guaraná', '#tela-refri', '#telaajuste')">
                     <div class="img-box"><img src="img/guarana.jpg" alt="Guaraná"></div>
                     <p>Guaraná</p>
                 </div>
-                <div class="card" onclick="escolherItem('Bebida', 'Fanta', '#tela-refri', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Fanta', '#tela-refri', '#telaajuste')">
                     <div class="img-box"><img src="img/fanta.jpg" alt="Fanta"></div>
                     <p>Fanta</p>
                 </div>
-                <div class="card" onclick="escolherItem('Bebida', 'Sprite', '#tela-refri', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Sprite', '#tela-refri', '#telaajuste')">
                     <div class="img-box"><img src="img/sprite.jpg" alt="Sprite"></div>
                     <p>Sprite</p>
                 </div>
@@ -536,19 +553,19 @@
                 <h2>Natural</h2>
             </div>
             <div class="grid-opcoes">
-                <div class="card" onclick="escolherItem('Bebida', 'Suco de Laranja', '#tela-suco', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Suco de Laranja', '#tela-suco', '#telaajuste')">
                     <div class="img-box"><img src="img/laranja.jpg" alt="Laranja"></div>
                     <p>Laranja</p>
                 </div>
-                <div class="card" onclick="escolherItem('Bebida', 'Suco de Uva', '#tela-suco', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Suco de Uva', '#tela-suco', '#telaajuste')">
                     <div class="img-box"><img src="img/uva.jpg" alt="Uva"></div>
                     <p>Uva</p>
                 </div>
-                <div class="card" onclick="escolherItem('Bebida', 'Suco de Morango', '#tela-suco', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Suco de Morango', '#tela-suco', '#telaajuste')">
                     <div class="img-box"><img src="img/morango.jpg" alt="Morango"></div>
                     <p>Morango</p>
                 </div>
-                <div class="card" onclick="escolherItem('Bebida', 'Suco de Limão', '#tela-suco', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Suco de Limão', '#tela-suco', '#telaajuste')">
                     <div class="img-box"><img src="img/limao.jpg" alt="Limão"></div>
                     <p>Limão</p>
                 </div>
@@ -563,11 +580,11 @@
                 <h2>Hidrate-se</h2>
             </div>
             <div class="grid-opcoes">
-                <div class="card" onclick="escolherItem('Bebida', 'Água sem Gás', '#tela-agua', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Água sem Gás', '#tela-agua', '#telaajuste')">
                     <div class="img-box"><img src="img/sem-gas.jpg" alt="S/ Gás"></div>
                     <p>Sem Gás</p>
                 </div>
-                <div class="card" onclick="escolherItem('Bebida', 'Água com Gás', '#tela-agua', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Água com Gás', '#tela-agua', '#telaajuste')">
                     <div class="img-box"><img src="img/com-gas.jpg" alt="C/ Gás"></div>
                     <p>Com Gás</p>
                 </div>
@@ -582,19 +599,19 @@
                 <h2>Selecione</h2>
             </div>
             <div class="grid-opcoes">
-                <div class="card" onclick="escolherItem('Bebida', 'Vinho Tinto', '#tela-vinho', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Vinho Tinto', '#tela-vinho', '#telaajuste')">
                     <div class="img-box"><img src="img/vinho-tinto.jpg" alt="Tinto"></div>
                     <p>Tinto</p>
                 </div>
-                <div class="card" onclick="escolherItem('Bebida', 'Vinho Branco', '#tela-vinho', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Vinho Branco', '#tela-vinho', '#telaajuste')">
                     <div class="img-box"><img src="img/vinho-branco.jpg" alt="Branco"></div>
                     <p>Branco</p>
                 </div>
-                <div class="card" onclick="escolherItem('Bebida', 'Vinho Rosé', '#tela-vinho', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Vinho Rosé', '#tela-vinho', '#telaajuste')">
                     <div class="img-box"><img src="img/vinho-rose.jpg" alt="Rosé"></div>
                     <p>Rosé</p>
                 </div>
-                <div class="card" onclick="escolherItem('Bebida', 'Espumante', '#tela-vinho', '#tela-final')">
+                <div class="card" onclick="escolherItem('Bebida', 'Espumante', '#tela-vinho', '#telaajuste')">
                     <div class="img-box"><img src="img/espumante.jpg" alt="Casa"></div>
                     <p>Da Casa</p>
                 </div>
@@ -602,7 +619,22 @@
             <div class="btn-container"><button class="btn-voltar"
                     onclick="navegar('#tela-vinho', '#tela-bebidas')">VOLTAR</button></div>
         </section>
-
+        <section id="telaajuste" class="telaajuste">
+            <div class="section-header">
+                <h1>Observação</h1>
+                <h2>Escreva uma Observação</h2>
+            </div>
+            <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <input type="text" id="obs" placeholder="Ex: Sem cebola, por favor"
+                    style="padding: 12px 15px; font-size: 1rem; border-radius: 8px; border: 2px solid #ccc; width: 80%; max-width: 300px; margin-bottom: 20px;">
+                <button class="btn-start" onclick="
+                    const Observacao = document.getElementById('obs').value.trim();
+                    escolherItem('Remover', Observacao, '#telaajuste', '#tela-final');
+                ">
+                    CONTINUAR
+                </button>
+            </div>
+        </section>
         <section id="tela-final" style="justify-content: center;">
             <div style="width: 100%; text-align: center;">
                 <h1 style="margin-bottom: 10px;">Seu Pedido</h1>
@@ -629,7 +661,7 @@
 
     <script>
         // Objeto para armazenar o pedido
-        let pedido = { Massa: '', Molho: '', Extra: '', Bebida: '' };
+        let pedido = { Massa: '', Molho: '', Extra: [], Bebida: '', Remover: '' };
         // Função para navegar entre telas
         function navegar(atual, proximo) {
             let telaAtual = document.querySelector(atual);
@@ -641,11 +673,33 @@
                 if (proximo === '#tela-final') mostrarResumo();
             }
         }
-        // Função para escolher item e navegar
-        function escolherItem(categoria, item, atual, proximo) {
+        // Função para escolher item e navegar        
+         function escolherItem(categoria, item, atual, proximo) {
+            // Para Extra → toggle seleção sem navegação
+            if (categoria === 'Extra') {
+            
+                // Procurar o card clicado
+                const elemento = event.currentTarget;
+            
+                // Toggle no array
+                if (pedido.Extra.includes(item)) {
+                    pedido.Extra = pedido.Extra.filter(x => x !== item);
+                    elemento.classList.remove("selecionado");
+                } else {
+                    pedido.Extra.push(item);
+                    elemento.classList.add("selecionado");
+                }
+            
+                return; // extras NÃO navegam
+            }
+        
+            // Para Massa / Molho / Bebida → navegação normal
             pedido[categoria] = item;
             navegar(atual, proximo);
         }
+
+
+
         // Função para mostrar o resumo do pedido
         function mostrarResumo() {
             const box = document.getElementById('lista-pedido');
@@ -654,7 +708,16 @@
             for (let [cat, val] of Object.entries(pedido)) {
                 let row = document.createElement('div');
                 row.className = 'resumo-item';
-                row.innerHTML = `<span style="color:#666">${cat}:</span><span style="font-weight:bold; color:#2c1405">${val}</span>`;
+              
+              
+               // row.innerHTML = `<span style="color:#666">${cat}:</span><span style="font-weight:bold; color:#2c1405">${val}</span>`;
+                let texto = Array.isArray(val) ? val.join(', ') : val;
+
+                row.innerHTML =
+                    `<span style="color:#666">${cat}:</span>
+                     <span style="font-weight:bold; color:#2c1405">${texto}</span>`;
+
+              
                 box.appendChild(row);
             }
             // Envia o pedido para o servidor
@@ -671,7 +734,7 @@
         }
         // Função para reiniciar o pedido
         function reiniciar() {
-            pedido = { Massa: '', Molho: '', Extra: '', Bebida: '' };
+            pedido = { Massa: '', Molho: '', Extra: [], Bebida: '' };
             document.querySelectorAll('section').forEach(s => s.classList.remove('ativa'));
             document.querySelector('#tela1').classList.add('ativa');
         }
